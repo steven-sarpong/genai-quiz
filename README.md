@@ -2,18 +2,18 @@
 
 Ein universelles KI-gestütztes Quiz- und Prüfungstraining mit:
 
-- ✅ Lernmodus
-- ✅ Prüfungsmodus
-- ✅ 60-Minuten-Timer
-- ✅ Bestehensgrenze (65%)
-- ✅ Fehleranalyse
-- ✅ Themenstatistik
-- ✅ Mehrsprachigkeit (DE / EN)
-- ✅ GitHub Pages Hosting
-- ✅ Netlify Functions
-- ✅ OpenRouter AI Integration
-- ✅ Automatische Übersetzung von Fragen per KI
-- ✅ Unterstützung für zukünftige Quiz-Typen (ISTQB, GenAI, CKA, Linux, AWS, Security+, etc.)
+* ✅ Lernmodus
+* ✅ Prüfungsmodus
+* ✅ 60-Minuten-Timer
+* ✅ Bestehensgrenze (65%)
+* ✅ Fehleranalyse
+* ✅ Themenstatistik
+* ✅ Mehrsprachigkeit (DE / EN)
+* ✅ GitHub Pages Hosting
+* ✅ Netlify Functions
+* ✅ OpenRouter AI Integration
+* ✅ Automatische Übersetzung von Fragen per KI
+* ✅ Unterstützung für zukünftige Quiz-Typen (ISTQB, GenAI, CKA, Linux, AWS, Security+, Azure, Kubernetes usw.)
 
 ---
 
@@ -21,32 +21,32 @@ Ein universelles KI-gestütztes Quiz- und Prüfungstraining mit:
 
 ## Lernmodus
 
-- Sofortige Auswertung
-- Richtige Lösung direkt sichtbar
-- Erklärung anzeigen
-- Perfekt zum Lernen
+* Sofortige Auswertung
+* Richtige Lösung direkt sichtbar
+* Erklärung anzeigen
+* Perfekt zum Lernen
 
 ## Prüfungsmodus
 
-- Antworten werden gespeichert
-- Keine direkte Auswertung
-- Ergebnis erst am Ende
-- Realistische Prüfungssimulation
+* Antworten werden gespeichert
+* Keine direkte Auswertung
+* Ergebnis erst am Ende
+* Realistische Prüfungssimulation
 
 ## Prüfungssimulator
 
-- Zufällige Fragen
-- Timer
-- Bestehensgrenze 65%
+* Zufällige Fragen
+* Timer
+* Bestehensgrenze 65 %
 
 ---
 
 # Bewertung
 
-| Ergebnis | Status |
-|-----------|----------|
-| < 65 % | ❌ Nicht bestanden |
-| ≥ 65 % | ✅ Bestanden |
+| Ergebnis | Status            |
+| -------- | ----------------- |
+| < 65 %   | ❌ Nicht bestanden |
+| ≥ 65 %   | ✅ Bestanden       |
 
 ---
 
@@ -54,8 +54,8 @@ Ein universelles KI-gestütztes Quiz- und Prüfungstraining mit:
 
 Der Quiztrainer unterstützt:
 
-- 🇩🇪 Deutsch
-- 🇬🇧 Englisch
+* 🇩🇪 Deutsch
+* 🇬🇧 Englisch
 
 ### Besonderheit
 
@@ -76,7 +76,6 @@ Die Originalfragen liegen als Screenshots vor.
 genai-quiz/
 │
 ├── index.html
-│
 ├── README.md
 │
 └── netlify
@@ -114,22 +113,43 @@ Beispiel URL:
 https://keen-swan-cdc7f5.netlify.app/.netlify/functions/translate
 ```
 
+### Standardmodell
+
+Falls keine eigene `OPENROUTER_MODEL` Variable gesetzt wird, verwendet das System automatisch:
+
+```javascript
+google/gemini-2.5-flash-lite
+```
+
+Dieses Modell wird für:
+
+* OCR von Prüfungsfragen
+* Screenshot-Erkennung
+* Übersetzungen
+* Quiz-Importe
+
+verwendet.
+
 ---
 
 # OpenRouter Integration
 
 Die KI-Übersetzung läuft über OpenRouter.
 
-Aktuell verwendetes Modell:
+### Aktuell verwendetes Modell
 
 ```javascript
-nvidia/nemotron-3-ultra-550b-a55b:free
+google/gemini-2.5-flash-lite
 ```
 
-Alternativen:
+### Alternativen
 
 ```javascript
 google/gemini-2.5-flash
+```
+
+```javascript
+nvidia/nemotron-3-ultra-550b-a55b:free
 ```
 
 ```javascript
@@ -159,7 +179,7 @@ OPENROUTER_MODEL
 Beispiel:
 
 ```text
-OPENROUTER_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free
+OPENROUTER_MODEL=google/gemini-2.5-flash-lite
 ```
 
 ---
@@ -194,14 +214,14 @@ Quiz
 
 Eigene Quiz erstellen:
 
-- GenAI
-- ISTQB
-- CKA
-- Linux Essentials
-- AWS
-- Security+
-- Azure
-- Kubernetes
+* GenAI
+* ISTQB
+* CKA
+* Linux Essentials
+* AWS
+* Security+
+* Azure
+* Kubernetes
 
 ---
 
@@ -249,17 +269,19 @@ Projekt klonen:
 git clone https://github.com/steven-sarpong/genai-quiz.git
 ```
 
-Starten:
+Projekt öffnen:
 
 ```bash
 cd genai-quiz
 ```
 
+Direkt starten:
+
 ```bash
 open index.html
 ```
 
-oder
+oder lokalen Server starten:
 
 ```bash
 python -m http.server 8000
@@ -279,18 +301,18 @@ git push
 
 ## Netlify
 
-Automatisches Deployment nach Git Push.
+Automatisches Deployment nach jedem Git Push.
 
 ---
 
 # Tastenkürzel
 
-| Taste | Funktion |
-|---------|----------|
-| A-E | Antwort wählen |
-| Enter | Prüfen |
-| ← | Vorherige Frage |
-| → | Nächste Frage |
+| Taste | Funktion        |
+| ----- | --------------- |
+| A-E   | Antwort wählen  |
+| Enter | Prüfen          |
+| ←     | Vorherige Frage |
+| →     | Nächste Frage   |
 
 ---
 
