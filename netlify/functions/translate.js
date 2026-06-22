@@ -26,7 +26,7 @@ Existing topic: ${body.topic || ""}`;
       "X-OpenRouter-Title": "Quiz German Translation"
     },
     body: JSON.stringify({
-      model: process.env.OPENROUTER_MODEL || "model: google/gemini-2.5-flash-lite",
+      model: process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash-lite",
       messages: [
         { role: "system", content: "Return only valid JSON. No markdown." },
         { role: "user", content: [
