@@ -115,7 +115,7 @@ async function translateQuestionData(d){
  const s=document.getElementById("translateStatus");if(s)s.textContent=tr("translating");
  const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({targetLanguage:"de",questionNumber:d.q,original:d.original||("Item "+d.q),source:d.source||"",topic:d.topic||"",note:d.note||"",answer:d.answer||[],image:d.img,instruction:"Translate this English quiz screenshot into German. Return JSON only."})});
  if(!res.ok)throw new Error("HTTP "+res.status);
- const data=await res.json();setCachedTranslation(d.q,data);if(s)s.textContent=tr("translated");return data
+ const data=await res.json();if(data&&data.error){if(s)s.textContent=tr("translationFailed")+": "+data.error;return data}setCachedTranslation(d.q,data);if(s)s.textContent=tr("translated");return data
 }
 async function translateCurrentQuestion(){if(typeof current!=="function")return;try{await translateQuestionData(current());render()}catch(e){const s=document.getElementById("translateStatus");if(s)s.textContent=tr("translationFailed")+": "+e.message}}
 function showTranslatedCard(d,data){const imgWrap=document.getElementById("qimgWrap"),card=document.getElementById("translatedQuestionCard");if(!imgWrap||!card)return;if(currentLang==="en"||!data){imgWrap.classList.remove("hide");card.classList.add("hide");return}imgWrap.classList.add("hide");card.classList.remove("hide");const opts=data.options||{};card.innerHTML=`<h3>${tr("translatedQuestion")} #${d.q}</h3><p>${data.question||""}</p>${["A","B","C","D","E"].map(l=>opts[l]?`<div class="opt"><b>${l}</b> ${opts[l]}</div>`:"").join("")}<div class="source-note">${tr("topic")}: ${data.topic||d.topic||""}</div><button type="button" onclick="document.getElementById('qimgWrap').classList.toggle('hide')">${tr("originalScreenshot")}</button>`}
@@ -276,6 +276,7 @@ function handleScanFile(ev){
    const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({image:dataUrl})});
    if(!res.ok)throw new Error("HTTP "+res.status);
    const data=await res.json();
+   if(data&&data.error)throw new Error(data.error);
    scanState={img:dataUrl,question:data.question||"",options:data.options||{},answer:Array.isArray(data.answer)?data.answer:[],multi:!!data.multi,topic:data.topic||"",note:data.note||""};
    renderScanPreview();
    if(status)status.textContent="";
