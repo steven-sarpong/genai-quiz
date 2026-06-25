@@ -40,7 +40,8 @@ Only include option letters that are visible in the photo. "answer" is your best
             { type: "image_url", image_url: { url: body.image } }
           ]}
         ],
-        temperature: 0.1
+        temperature: 0.1,
+        max_tokens: 1024
       })
     });
     result = await apiRes.json();
